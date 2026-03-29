@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Request - Hostel Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Apply for Leave</h1>
+            <p>Submit your leave application</p>
+        </div>
+
+        <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="from-date">From Date</label>
+                    <input type="date" id="from-date" name="from-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="to-date">To Date</label>
+                    <input type="date" id="to-date" name="to-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="leave-type">Leave Type</label>
+                    <select id="leave-type" name="leave-type" required>
+                        <option value="">-- Select Leave Type --</option>
+                        <option value="home">Going Home</option>
+                        <option value="medical">Medical Leave</option>
+                        <option value="emergency">Emergency</option>
+                        <option value="personal">Personal Work</option>
+                        <option value="family">Family Function</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Reason for Leave</label>
+                    <textarea id="reason" name="reason" placeholder="Please provide detailed reason for your leave application" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact Number (During Leave)</label>
+                    <input type="tel" id="contact" name="contact" placeholder="Enter contact number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address (During Leave)</label>
+                    <textarea id="address" name="address" placeholder="Enter your address during leave period" required></textarea>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary">Submit Leave Request</button>
+                    <a href="student_dashboard.html" class="btn btn-back">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="info-card" style="margin-top: 30px;">
+            <h3>Previous Leave Applications</h3>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10 Dec 2024</td>
+                            <td>15 Dec 2024</td>
+                            <td>Going Home</td>
+                            <td><span class="status status-resolved">Approved</span></td>
+                        </tr>
+                        <tr>
+                            <td>5 Nov 2024</td>
+                            <td>8 Nov 2024</td>
+                            <td>Family Function</td>
+                            <td><span class="status status-resolved">Approved</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
