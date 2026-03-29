@@ -9,102 +9,235 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Mess Menu</h1>
+            <h1>🍽️ Mess Menu</h1>
             <p>Weekly meal schedule</p>
+            <div style="margin-top: 15px;">
+                <span id="currentDay" style="background: linear-gradient(135deg, #6366f1, #ec4899); padding: 8px 20px; border-radius: 20px; color: white; font-weight: 600;"></span>
+            </div>
         </div>
 
+        <!-- Day Filter Buttons -->
+        <div style="display: flex; justify-content: center; gap: 10px; margin: 30px 0; flex-wrap: wrap;">
+            <button class="day-btn active" onclick="filterDay('all')">All Days</button>
+            <button class="day-btn" onclick="filterDay('Monday')">Mon</button>
+            <button class="day-btn" onclick="filterDay('Tuesday')">Tue</button>
+            <button class="day-btn" onclick="filterDay('Wednesday')">Wed</button>
+            <button class="day-btn" onclick="filterDay('Thursday')">Thu</button>
+            <button class="day-btn" onclick="filterDay('Friday')">Fri</button>
+            <button class="day-btn" onclick="filterDay('Saturday')">Sat</button>
+            <button class="day-btn" onclick="filterDay('Sunday')">Sun</button>
+        </div>
+
+        <!-- Menu Table -->
         <div class="table-container">
-            <table>
+            <table id="menuTable">
                 <thead>
                     <tr>
                         <th>Day</th>
-                        <th>Breakfast</th>
-                        <th>Lunch</th>
-                        <th>Snacks</th>
-                        <th>Dinner</th>
+                        <th>🌅 Breakfast<br><span style="font-size: 0.8em; font-weight: 400;">7:00 - 9:00 AM</span></th>
+                        <th>🌞 Lunch<br><span style="font-size: 0.8em; font-weight: 400;">12:00 - 2:00 PM</span></th>
+                        <th>☕ Snacks<br><span style="font-size: 0.8em; font-weight: 400;">4:00 - 5:30 PM</span></th>
+                        <th>🌙 Dinner<br><span style="font-size: 0.8em; font-weight: 400;">7:30 - 9:30 PM</span></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Monday</strong></td>
-                        <td>Poha, Tea/Coffee</td>
-                        <td>Dal, Rice, Roti, Sabzi, Curd</td>
-                        <td>Samosa, Tea</td>
-                        <td>Rajma, Rice, Roti, Salad</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Tuesday</strong></td>
-                        <td>Idli, Sambar, Chutney, Tea/Coffee</td>
-                        <td>Kadhi, Rice, Roti, Mix Veg, Pickle</td>
-                        <td>Bread Pakora, Tea</td>
-                        <td>Paneer Curry, Roti, Rice, Raita</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Wednesday</strong></td>
-                        <td>Upma, Tea/Coffee</td>
-                        <td>Chole, Rice, Roti, Aloo Sabzi, Papad</td>
-                        <td>Vada Pav, Tea</td>
-                        <td>Dal Makhani, Roti, Rice, Salad</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Thursday</strong></td>
-                        <td>Paratha, Curd, Pickle, Tea/Coffee</td>
-                        <td>Sambhar, Rice, Roti, Bhindi, Curd</td>
-                        <td>Sandwich, Tea</td>
-                        <td>Chicken Curry, Roti, Rice (Non-Veg)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Friday</strong></td>
-                        <td>Dosa, Chutney, Sambar, Tea/Coffee</td>
-                        <td>Rajma, Rice, Roti, Cabbage, Pickle</td>
-                        <td>Pakora, Tea</td>
-                        <td>Egg Curry, Roti, Rice (Egg)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Saturday</strong></td>
-                        <td>Aloo Paratha, Curd, Tea/Coffee</td>
-                        <td>Dal Fry, Rice, Roti, Paneer Sabzi, Papad</td>
-                        <td>Burger, Tea</td>
-                        <td>Veg Biryani, Raita, Salad</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sunday</strong></td>
-                        <td>Puri, Aloo Sabzi, Tea/Coffee</td>
-                        <td>Special Thali - Dal, Rice, Roti, Special Sabzi, Sweet, Curd</td>
-                        <td>Maggi, Tea</td>
-                        <td>Chicken Biryani, Raita (Non-Veg)</td>
-                    </tr>
+                <tbody id="menuBody">
                 </tbody>
             </table>
         </div>
 
+        <!-- Meal Timing Card -->
         <div class="info-card">
-            <h3>Timing</h3>
-            
-            <div class="info-row">
-                <span class="info-label">Breakfast:</span>
-                <span class="info-value">7:00 AM - 9:00 AM</span>
+            <h3>⏰ Meal Timings</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 12px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">🌅</div>
+                    <div style="font-weight: 700; color: #78350f; margin-bottom: 5px;">Breakfast</div>
+                    <div style="color: #92400e;">7:00 AM - 9:00 AM</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #fed7aa, #fdba74); border-radius: 12px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">🌞</div>
+                    <div style="font-weight: 700; color: #7c2d12; margin-bottom: 5px;">Lunch</div>
+                    <div style="color: #9a3412;">12:00 PM - 2:00 PM</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #fecaca, #fca5a5); border-radius: 12px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">☕</div>
+                    <div style="font-weight: 700; color: #7f1d1d; margin-bottom: 5px;">Snacks</div>
+                    <div style="color: #991b1b;">4:00 PM - 5:30 PM</div>
+                </div>
+                <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #ddd6fe, #c4b5fd); border-radius: 12px;">
+                    <div style="font-size: 2em; margin-bottom: 10px;">🌙</div>
+                    <div style="font-weight: 700; color: #4c1d95; margin-bottom: 5px;">Dinner</div>
+                    <div style="color: #5b21b6;">7:30 PM - 9:30 PM</div>
+                </div>
             </div>
+        </div>
 
-            <div class="info-row">
-                <span class="info-label">Lunch:</span>
-                <span class="info-value">12:00 PM - 2:00 PM</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Snacks:</span>
-                <span class="info-value">4:00 PM - 5:30 PM</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Dinner:</span>
-                <span class="info-value">7:30 PM - 9:30 PM</span>
+        <!-- Dietary Preferences -->
+        <div class="info-card">
+            <h3>🥗 Dietary Information</h3>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 15px;">
+                <span style="background: #d4f4dd; color: #065f46; padding: 10px 20px; border-radius: 20px; font-weight: 600;">🌱 Vegetarian Options Available</span>
+                <span style="background: #fecaca; color: #7f1d1d; padding: 10px 20px; border-radius: 20px; font-weight: 600;">🍗 Non-Veg: Thu, Sun</span>
+                <span style="background: #fef3c7; color: #78350f; padding: 10px 20px; border-radius: 20px; font-weight: 600;">🥚 Egg: Friday</span>
             </div>
         </div>
 
         <div style="text-align: center; margin-top: 30px;">
-            <a href="student_dashboard.html" class="btn btn-back">Back to Dashboard</a>
+            <a href="student_dashboard.html" class="btn btn-back">← Back to Dashboard</a>
         </div>
     </div>
+
+    <style>
+        .day-btn {
+            padding: 10px 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #6b7280;
+        }
+        
+        .day-btn:hover {
+            border-color: #6366f1;
+            color: #6366f1;
+            transform: translateY(-2px);
+        }
+        
+        .day-btn.active {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border-color: #6366f1;
+        }
+        
+        .menu-row {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-row.highlight {
+            background: linear-gradient(90deg, rgba(99, 102, 241, 0.1), transparent) !important;
+            border-left: 4px solid #6366f1;
+        }
+    </style>
+
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('studentLoggedIn') && !sessionStorage.getItem('studentLoggedIn')) {
+            window.location.href = 'student_login.html';
+        }
+
+        // Menu data
+        const menuData = [
+            {
+                day: 'Monday',
+                breakfast: 'Poha, Tea/Coffee, Banana',
+                lunch: 'Dal, Rice, Roti, Mixed Veg, Curd, Pickle',
+                snacks: 'Samosa (2), Tea/Coffee',
+                dinner: 'Rajma, Rice, Roti, Salad, Papad'
+            },
+            {
+                day: 'Tuesday',
+                breakfast: 'Idli (3), Sambar, Chutney, Tea/Coffee',
+                lunch: 'Kadhi, Rice, Roti, Aloo Gobi, Pickle, Curd',
+                snacks: 'Bread Pakora (2), Tea/Coffee',
+                dinner: 'Paneer Curry, Roti, Rice, Raita, Salad'
+            },
+            {
+                day: 'Wednesday',
+                breakfast: 'Upma, Tea/Coffee, Fruit',
+                lunch: 'Chole, Rice, Roti, Aloo Sabzi, Papad',
+                snacks: 'Vada Pav (2), Tea/Coffee',
+                dinner: 'Dal Makhani, Roti, Rice, Salad, Pickle'
+            },
+            {
+                day: 'Thursday',
+                breakfast: 'Paratha (2), Curd, Pickle, Tea/Coffee',
+                lunch: 'Sambhar, Rice, Roti, Bhindi, Curd',
+                snacks: 'Sandwich, Tea/Coffee',
+                dinner: '🍗 Chicken Curry, Roti, Rice (Non-Veg)'
+            },
+            {
+                day: 'Friday',
+                breakfast: 'Dosa (2), Chutney, Sambar, Tea/Coffee',
+                lunch: 'Rajma, Rice, Roti, Cabbage, Pickle',
+                snacks: 'Pakora, Tea/Coffee',
+                dinner: '🥚 Egg Curry, Roti, Rice (Egg Option)'
+            },
+            {
+                day: 'Saturday',
+                breakfast: 'Aloo Paratha (2), Curd, Tea/Coffee',
+                lunch: 'Dal Fry, Rice, Roti, Paneer Sabzi, Papad',
+                snacks: 'Burger, Tea/Coffee',
+                dinner: 'Veg Biryani, Raita, Salad, Papad'
+            },
+            {
+                day: 'Sunday',
+                breakfast: 'Puri (4), Aloo Sabzi, Tea/Coffee',
+                lunch: 'Special Thali - Dal, Rice, Roti, Special Sabzi, Sweet, Curd',
+                snacks: 'Maggi, Tea/Coffee',
+                dinner: '🍗 Chicken Biryani, Raita (Non-Veg Special)'
+            }
+        ];
+
+        // Display current day
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const today = days[new Date().getDay()];
+        document.getElementById('currentDay').textContent = `Today is ${today}`;
+
+        // Render menu
+        function renderMenu(filterDay = 'all') {
+            const tbody = document.getElementById('menuBody');
+            tbody.innerHTML = '';
+            
+            menuData.forEach(menu => {
+                if (filterDay === 'all' || filterDay === menu.day) {
+                    const row = document.createElement('tr');
+                    row.className = 'menu-row';
+                    if (menu.day === today) {
+                        row.classList.add('highlight');
+                    }
+                    
+                    row.innerHTML = `
+                        <td><strong style="color: #6366f1;">${menu.day}</strong></td>
+                        <td>${menu.breakfast}</td>
+                        <td>${menu.lunch}</td>
+                        <td>${menu.snacks}</td>
+                        <td>${menu.dinner}</td>
+                    `;
+                    tbody.appendChild(row);
+                }
+            });
+        }
+
+        // Filter by day
+        function filterDay(day) {
+            // Update active button
+            document.querySelectorAll('.day-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Render filtered menu
+            renderMenu(day);
+        }
+
+        // Initial render
+        renderMenu();
+
+        // Add animation to cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.info-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -9,40 +9,124 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Hostel Management System</h1>
-            <p>Welcome to the Hostel Management Portal</p>
+            <h1>🏢 Hostel Management System</h1>
+            <p>Welcome to the Future of Hostel Management</p>
         </div>
 
-        <div style="text-align: center; margin: 30px 0;">
-            <p style="font-size: 1.1em; color: #4a5568; margin-bottom: 40px;">
-                A comprehensive system for managing hostel operations, student accommodations, 
-                and administrative tasks efficiently. Please select your portal to continue.
+        <div style="text-align: center; margin: 40px 0; animation: fadeIn 1s ease-out;">
+            <p style="font-size: 1.2em; color: #4a5568; margin-bottom: 20px; line-height: 1.8; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Experience seamless hostel operations with our comprehensive management platform. 
+                From student accommodations to administrative oversight, we've got everything 
+                covered in one powerful system.
             </p>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 30px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5em; font-weight: 800; color: #6366f1;">450+</div>
+                    <div style="color: #6b7280; font-weight: 600;">Students</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5em; font-weight: 800; color: #ec4899;">150+</div>
+                    <div style="color: #6b7280; font-weight: 600;">Rooms</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2.5em; font-weight: 800; color: #10b981;">96%</div>
+                    <div style="color: #6b7280; font-weight: 600;">Occupancy</div>
+                </div>
+            </div>
         </div>
 
         <div class="portal-selection">
-            <div class="portal-card">
-                <h2>👨‍🎓 Student Portal</h2>
-                <p style="color: #666; margin: 20px 0;">
-                    Access your profile, room details, fee information, mess menu, 
-                    and submit leave requests or complaints.
+            <div class="portal-card" onclick="navigateTo('student_login.html')">
+                <div style="font-size: 4em; margin-bottom: 20px;">👨‍🎓</div>
+                <h2>Student Portal</h2>
+                <p style="color: #6b7280; margin: 25px 0; font-size: 1.05em; line-height: 1.6;">
+                    Access your profile, view room details, check fees, browse mess menu, 
+                    apply for leave, and register complaints.
                 </p>
                 <a href="student_login.html" class="btn btn-primary">Enter Student Portal</a>
             </div>
 
-            <div class="portal-card">
-                <h2>👨‍💼 Employee Portal</h2>
-                <p style="color: #666; margin: 20px 0;">
-                    Manage students, rooms, complaints, fees, and generate 
-                    comprehensive reports for hostel administration.
+            <div class="portal-card" onclick="navigateTo('employee_login.html')">
+                <div style="font-size: 4em; margin-bottom: 20px;">👨‍💼</div>
+                <h2>Employee Portal</h2>
+                <p style="color: #6b7280; margin: 25px 0; font-size: 1.05em; line-height: 1.6;">
+                    Manage students, allocate rooms, handle complaints, track fees, 
+                    and generate comprehensive analytical reports.
                 </p>
                 <a href="employee_login.html" class="btn btn-primary">Enter Employee Portal</a>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 50px; color: #718096; font-size: 0.9em;">
-            <p>&copy; 2024 Hostel Management System. All rights reserved.</p>
+        <div style="text-align: center; margin-top: 60px; padding-top: 40px; border-top: 2px solid #e5e7eb;">
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 30px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5em;">🔒</span>
+                    <span style="color: #6b7280; font-weight: 600;">Secure Access</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5em;">⚡</span>
+                    <span style="color: #6b7280; font-weight: 600;">Real-time Updates</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.5em;">📊</span>
+                    <span style="color: #6b7280; font-weight: 600;">Detailed Analytics</span>
+                </div>
+            </div>
+            <p style="color: #9ca3af; font-size: 0.95em;">&copy; 2024 Hostel Management System. All rights reserved.</p>
         </div>
     </div>
+
+    <script>
+        // Smooth navigation with animation
+        function navigateTo(url) {
+            document.querySelector('.container').style.animation = 'slideUp 0.4s ease-out reverse';
+            setTimeout(() => {
+                window.location.href = url;
+            }, 300);
+        }
+
+        // Add entrance animations to portal cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.portal-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `slideUp 0.6s ease-out ${index * 0.2}s both`;
+            });
+
+            // Add particle effect on mouse move
+            document.addEventListener('mousemove', function(e) {
+                if (Math.random() > 0.95) {
+                    createParticle(e.pageX, e.pageY);
+                }
+            });
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.borderRadius = '50%';
+            particle.style.background = 'rgba(99, 102, 241, 0.6)';
+            particle.style.pointerEvents = 'none';
+            particle.style.animation = 'particleFade 1s ease-out forwards';
+            document.body.appendChild(particle);
+
+            setTimeout(() => particle.remove(), 1000);
+        }
+
+        // Add particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFade {
+                to {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>

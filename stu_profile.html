@@ -9,62 +9,232 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Student Profile</h1>
-            <p>Your personal information</p>
+            <h1>👤 Student Profile</h1>
+            <p>Your personal information and details</p>
         </div>
 
+        <!-- Profile Header with Avatar -->
+        <div style="text-align: center; margin: 40px 0; animation: fadeIn 0.6s ease-out;">
+            <div style="width: 120px; height: 120px; margin: 0 auto 20px; background: linear-gradient(135deg, #6366f1, #ec4899); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3em; color: white; box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4); animation: pulse 2s ease-in-out infinite;">
+                👨‍🎓
+            </div>
+            <h2 style="color: #1f2937; font-size: 2em; margin-bottom: 8px; font-weight: 800;">Rahul Kumar Sharma</h2>
+            <p style="color: #6b7280; font-size: 1.1em;">Computer Science Engineering</p>
+            <div style="margin-top: 15px;">
+                <span class="status status-paid" style="font-size: 0.9em;">Active Student</span>
+            </div>
+        </div>
+
+        <!-- Personal Details Card -->
         <div class="info-card">
-            <h3>Personal Details</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0;">📋 Personal Details</h3>
+                <button onclick="editProfile()" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9em;">
+                    ✏️ Edit Profile
+                </button>
+            </div>
             
             <div class="info-row">
-                <span class="info-label">Full Name:</span>
-                <span class="info-value">Rahul Kumar Sharma</span>
+                <span class="info-label">👤 Full Name:</span>
+                <span class="info-value" id="fullName">Rahul Kumar Sharma</span>
             </div>
 
             <div class="info-row">
-                <span class="info-label">Registration Number:</span>
-                <span class="info-value">2023CSE001</span>
+                <span class="info-label">🎓 Registration Number:</span>
+                <span class="info-value" id="regNumber">2023CSE001</span>
             </div>
 
             <div class="info-row">
-                <span class="info-label">Course:</span>
-                <span class="info-value">B.Tech Computer Science Engineering</span>
+                <span class="info-label">📚 Course:</span>
+                <span class="info-value" id="course">B.Tech Computer Science Engineering</span>
             </div>
 
             <div class="info-row">
-                <span class="info-label">Year:</span>
-                <span class="info-value">Second Year</span>
+                <span class="info-label">📅 Year:</span>
+                <span class="info-value" id="year">Second Year</span>
             </div>
 
             <div class="info-row">
-                <span class="info-label">Hostel Name:</span>
-                <span class="info-value">Hostel Block A</span>
+                <span class="info-label">🏢 Hostel Name:</span>
+                <span class="info-value" id="hostel">Hostel Block A</span>
             </div>
 
             <div class="info-row">
-                <span class="info-label">Room Number:</span>
-                <span class="info-value">A-204</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Email:</span>
-                <span class="info-value">rahul.sharma@college.edu</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Phone Number:</span>
-                <span class="info-value">+91 9876543210</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Date of Admission:</span>
-                <span class="info-value">15th July 2023</span>
+                <span class="info-label">🚪 Room Number:</span>
+                <span class="info-value" id="roomNumber">A-204</span>
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="student_dashboard.html" class="btn btn-back">Back to Dashboard</a>
+        <!-- Contact Information Card -->
+        <div class="info-card">
+            <h3>📞 Contact Information</h3>
+            
+            <div class="info-row">
+                <span class="info-label">📧 Email:</span>
+                <span class="info-value" id="email">rahul.sharma@college.edu</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">📱 Phone Number:</span>
+                <span class="info-value" id="phone">+91 9876543210</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">🏠 Home Address:</span>
+                <span class="info-value" id="address">123 MG Road, Mumbai, Maharashtra - 400001</span>
+            </div>
+        </div>
+
+        <!-- Academic Information Card -->
+        <div class="info-card">
+            <h3>🎯 Academic Information</h3>
+            
+            <div class="info-row">
+                <span class="info-label">📆 Date of Admission:</span>
+                <span class="info-value" id="admissionDate">15th July 2023</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">🆔 Student ID:</span>
+                <span class="info-value" id="studentId">STU2023001</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">📊 Current Semester:</span>
+                <span class="info-value" id="semester">4th Semester</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">📈 CGPA:</span>
+                <span class="info-value" id="cgpa">8.5 / 10.0</span>
+            </div>
+        </div>
+
+        <!-- Emergency Contact Card -->
+        <div class="info-card">
+            <h3>🚨 Emergency Contact</h3>
+            
+            <div class="info-row">
+                <span class="info-label">👨‍👩‍👦 Guardian Name:</span>
+                <span class="info-value" id="guardianName">Mr. Rajesh Sharma</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">🔗 Relation:</span>
+                <span class="info-value" id="relation">Father</span>
+            </div>
+
+            <div class="info-row">
+                <span class="info-label">📞 Emergency Phone:</span>
+                <span class="info-value" id="emergencyPhone">+91 9876543211</span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin-top: 40px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <button onclick="downloadProfile()" class="btn btn-secondary">
+                📥 Download Profile
+            </button>
+            <button onclick="printProfile()" class="btn btn-secondary">
+                🖨️ Print Profile
+            </button>
+            <a href="student_dashboard.html" class="btn btn-back">
+                ← Back to Dashboard
+            </a>
         </div>
     </div>
+
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('studentLoggedIn') && !sessionStorage.getItem('studentLoggedIn')) {
+            window.location.href = 'student_login.html';
+        }
+
+        // Pulse animation for avatar
+        const pulseStyle = document.createElement('style');
+        pulseStyle.textContent = `
+            @keyframes pulse {
+                0%, 100% {
+                    transform: scale(1);
+                    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.4);
+                }
+                50% {
+                    transform: scale(1.05);
+                    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.6);
+                }
+            }
+        `;
+        document.head.appendChild(pulseStyle);
+
+        // Edit profile function
+        function editProfile() {
+            showToast('Edit functionality would open a form to update your details.', 'info');
+        }
+
+        // Download profile function
+        function downloadProfile() {
+            showToast('Downloading profile as PDF...', 'success');
+            // In a real application, this would generate and download a PDF
+            setTimeout(() => {
+                showToast('Profile downloaded successfully!', 'success');
+            }, 1500);
+        }
+
+        // Print profile function
+        function printProfile() {
+            window.print();
+        }
+
+        // Toast notification
+        function showToast(message, type = 'success') {
+            const icons = {
+                success: '✅',
+                error: '❌',
+                info: 'ℹ️'
+            };
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 1.5em;">${icons[type] || icons.info}</span>
+                    <span style="font-weight: 600; color: #1f2937;">${message}</span>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideInRight 0.4s ease-out reverse';
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        // Add entrance animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.info-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+
+        // Add hover effect to info rows
+        document.querySelectorAll('.info-row').forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(90deg, rgba(99, 102, 241, 0.05), transparent)';
+                this.style.paddingLeft = '15px';
+            });
+            
+            row.addEventListener('mouseleave', function() {
+                this.style.background = '';
+                this.style.paddingLeft = '';
+            });
+        });
+    </script>
 </body>
 </html>
