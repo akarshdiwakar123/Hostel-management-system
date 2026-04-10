@@ -1,6 +1,6 @@
 # College Hostel Counselling System (CHCS)
 
-🚀 **Live Deployment:** [View the platform on Vercel here](https://your-vercel-live-link-here.vercel.app/)
+🚀 **Live Deployment:** [View the platform on Vercel here](https://hostel-management-system-sooty.vercel.app/)
 
 A modern, enterprise-grade static web application designed to streamline hostel management and administrative tasks for educational institutions. The platform provides entirely separate dedicated interfaces for Students and Administrators (Employees), connected through a centralized, responsive dashboard system.
 
