@@ -3,72 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Details - Hostel Management System</title>
+    <title>Room Details - VIT VTOP</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #2b5876;
+            margin-bottom: 20px;
+        }
+        .profile-row {
+            display: flex;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .profile-row:last-child {
+            border-bottom: none;
+        }
+        .profile-label {
+            font-weight: 500;
+            width: 200px;
+            color: #555;
+        }
+        .profile-value {
+            color: #333;
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Room Details</h1>
-            <p>Information about your assigned room</p>
-        </div>
+    <div class="top-bar">
+        <svg viewBox="0 0 100 100" width="40" height="40" style="margin-right: 15px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M 25 35 L 75 35 L 50 75 Z" fill="none" stroke="white" stroke-width="3"/>
+            <text x="50" y="55" fill="white" font-size="16" font-family="Arial" text-anchor="middle">VIT</text>
+        </svg>
+        <h1>VIT <span>(Vellore Campus)</span> - Student Portal</h1>
+    </div>
 
-        <div class="info-card">
-            <h3>Room Information</h3>
+    <div class="dashboard-wrapper">
+        <div class="sidebar">
+            <div class="user-profile-sm">
+                <svg viewBox="0 0 100 100" width="80" height="80" style="border-radius: 50%; background: #ddd; margin-bottom: 10px;">
+                    <circle cx="50" cy="35" r="20" fill="#999" />
+                    <path d="M 20 90 Q 50 60 80 90" fill="none" stroke="#999" stroke-width="10" stroke-linecap="round" />
+                </svg>
+                <div style="font-weight: bold; color: #333;" id="studentName">Student Name</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="student_dashboard.html">Dashboard Overview</a></li>
+                <li><a href="stu_profile.html">View Profile</a></li>
+                <li><a href="stu_room.html" class="active">Room Details</a></li>
+                <li><a href="stud_fees.html">Fee Details</a></li>
+                <li><a href="stu_mess.html">Mess Menu</a></li>
+                <li><a href="stu_leave.html">Apply Leave</a></li>
+                <li><a href="stu_complaint.html">Register Complaint</a></li>
+                <li><a href="#" onclick="handleLogout()" style="color: #dc3545;">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="content-header">
+                <h2>Room Details</h2>
+            </div>
             
-            <div class="info-row">
-                <span class="info-label">Room Number:</span>
-                <span class="info-value">A-204</span>
+            <div class="profile-section">
+                <h3 style="margin-bottom: 15px; color: #2b5876;">Room Information</h3>
+                <div class="profile-row">
+                    <div class="profile-label">Room Number</div>
+                    <div class="profile-value">A-204</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Block</div>
+                    <div class="profile-value">Block A (Boys Hostel)</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Floor</div>
+                    <div class="profile-value">Second Floor</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Room Type</div>
+                    <div class="profile-value">Non-AC</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Bed Capacity</div>
+                    <div class="profile-value">3 Beds</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Current Occupancy</div>
+                    <div class="profile-value">3 Students</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Facilities</div>
+                    <div class="profile-value">Study Table, Cupboard, Ceiling Fan, Attached Bathroom</div>
+                </div>
             </div>
 
-            <div class="info-row">
-                <span class="info-label">Block:</span>
-                <span class="info-value">Block A (Boys Hostel)</span>
+            <div class="profile-section">
+                <h3 style="margin-bottom: 15px; color: #2b5876;">Roommates</h3>
+                <div class="profile-row">
+                    <div class="profile-label">Roommate 1</div>
+                    <div class="profile-value">Amit Patel (2023CSE015)</div>
+                </div>
+                <div class="profile-row">
+                    <div class="profile-label">Roommate 2</div>
+                    <div class="profile-value">Vikram Singh (2023CSE028)</div>
+                </div>
             </div>
-
-            <div class="info-row">
-                <span class="info-label">Floor:</span>
-                <span class="info-value">Second Floor</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Room Type:</span>
-                <span class="info-value">Non-AC</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Bed Capacity:</span>
-                <span class="info-value">3 Beds</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Current Occupancy:</span>
-                <span class="info-value">3 Students</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Facilities:</span>
-                <span class="info-value">Study Table, Cupboard, Ceiling Fan, Attached Bathroom</span>
-            </div>
-        </div>
-
-        <div class="info-card">
-            <h3>Roommates</h3>
-            
-            <div class="info-row">
-                <span class="info-label">Roommate 1:</span>
-                <span class="info-value">Amit Patel (2023CSE015)</span>
-            </div>
-
-            <div class="info-row">
-                <span class="info-label">Roommate 2:</span>
-                <span class="info-value">Vikram Singh (2023CSE028)</span>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="student_dashboard.html" class="btn btn-back">Back to Dashboard</a>
         </div>
     </div>
+
+    <div class="footer">
+        Copyright © 2026 Software Development Cell, VIT, Vellore-632 014.
+    </div>
+
+    <script>
+        if (!localStorage.getItem('studentLoggedIn') && !sessionStorage.getItem('studentLoggedIn')) {
+            window.location.href = 'student_login.html';
+        }
+        const username = localStorage.getItem('studentUsername') || sessionStorage.getItem('studentUsername') || 'Student';
+        document.getElementById('studentName').textContent = username;
+
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('studentLoggedIn');
+                localStorage.removeItem('studentUsername');
+                sessionStorage.removeItem('studentLoggedIn');
+                sessionStorage.removeItem('studentUsername');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
 </body>
 </html>

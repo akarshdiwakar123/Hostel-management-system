@@ -3,105 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Login - Hostel Management System</title>
+    <title>Student Login - VIT VTOP</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #f7f9fa; }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>👨‍🎓 Student Login</h1>
-            <p>Enter your credentials to access your dashboard</p>
-        </div>
+    <div class="top-bar">
+        <svg viewBox="0 0 100 100" width="40" height="40" style="margin-right: 15px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M 25 35 L 75 35 L 50 75 Z" fill="none" stroke="white" stroke-width="3"/>
+            <text x="50" y="55" fill="white" font-size="16" font-family="Arial" text-anchor="middle">VIT</text>
+        </svg>
+        <h1>VIT <span>(Vellore Campus)</span></h1>
+    </div>
 
-        <div class="form-container">
+    <div class="container-center">
+        <div class="auth-box">
+            <h2>Student Login</h2>
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
-                    <label for="username">
-                        <span style="display: flex; align-items: center; gap: 8px;">
-                            📧 Username / Registration Number
-                        </span>
-                    </label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        placeholder="Enter your registration number" 
-                        required
-                        autocomplete="username"
-                    >
-                    <div id="usernameError" style="color: #ef4444; font-size: 0.85em; margin-top: 5px; display: none;"></div>
+                    <label for="username">Registration Number / Username</label>
+                    <input type="text" id="username" name="username" class="form-control" required autocomplete="username">
+                    <div id="usernameError" style="color: #dc3545; font-size: 12px; margin-top: 5px; display: none;"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">
-                        <span style="display: flex; align-items: center; gap: 8px;">
-                            🔒 Password
-                        </span>
-                    </label>
-                    <div style="position: relative;">
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            placeholder="Enter your password" 
-                            required
-                            autocomplete="current-password"
-                        >
-                        <button 
-                            type="button" 
-                            onclick="togglePassword()" 
-                            style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.2em;"
-                            title="Toggle password visibility"
-                        >
-                            👁️
-                        </button>
-                    </div>
-                    <div id="passwordError" style="color: #ef4444; font-size: 0.85em; margin-top: 5px; display: none;"></div>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password">
+                    <div id="passwordError" style="color: #dc3545; font-size: 12px; margin-top: 5px; display: none;"></div>
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px 0;">
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95em; color: #6b7280;">
-                        <input type="checkbox" id="rememberMe" style="cursor: pointer;">
-                        Remember me
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <label style="font-size: 14px; color: #555;">
+                        <input type="checkbox" id="rememberMe"> Remember me
                     </label>
-                    <a href="#" onclick="showForgotPassword(); return false;" style="color: #6366f1; text-decoration: none; font-weight: 600; font-size: 0.95em;">
-                        Forgot Password?
-                    </a>
+                    <a href="#" onclick="showForgotPassword(); return false;" style="color: #2b5876; text-decoration: none; font-size: 14px;">Forgot Password?</a>
                 </div>
 
-                <div style="text-align: center; margin-top: 35px;">
-                    <button type="submit" class="btn btn-primary" id="loginBtn" style="width: 100%; position: relative;">
-                        <span id="btnText">Login to Dashboard</span>
-                        <span id="btnLoader" style="display: none;" class="loading"></span>
-                    </button>
-                </div>
+                <button type="submit" class="btn-primary" id="loginBtn">Login</button>
             </form>
 
-            <div style="text-align: center; margin-top: 35px;">
-                <a href="index.html" class="btn btn-back" style="width: 100%;">
-                    ← Back to Home
-                </a>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px; padding-top: 25px; border-top: 2px solid #e5e7eb;">
-                <p style="color: #6b7280; font-size: 0.9em;">
-                    Demo Credentials: <br>
-                    <span style="color: #6366f1; font-weight: 600;">Username: 2023CSE001</span> | 
-                    <span style="color: #6366f1; font-weight: 600;">Password: student123</span>
-                </p>
-            </div>
+            <a href="index.html" class="btn-back">Back to Home</a>
         </div>
     </div>
 
+    <div class="footer">
+        Copyright © 2026 Software Development Cell, VIT, Vellore-632 014.
+    </div>
+
     <script>
-        let passwordVisible = false;
-
-        function togglePassword() {
-            passwordVisible = !passwordVisible;
-            const passwordInput = document.getElementById('password');
-            passwordInput.type = passwordVisible ? 'text' : 'password';
-        }
-
         function handleLogin(event) {
             event.preventDefault();
             
@@ -109,35 +72,29 @@
             const password = document.getElementById('password').value;
             const rememberMe = document.getElementById('rememberMe').checked;
             
-            // Clear previous errors
             document.getElementById('usernameError').style.display = 'none';
             document.getElementById('passwordError').style.display = 'none';
             
-            // Validation
             let hasError = false;
             
             if (username.length < 3) {
-                document.getElementById('usernameError').textContent = 'Username must be at least 3 characters';
+                document.getElementById('usernameError').textContent = 'Invalid Username';
                 document.getElementById('usernameError').style.display = 'block';
                 hasError = true;
             }
             
-            if (password.length < 6) {
-                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters';
+            if (password.length < 5) {
+                document.getElementById('passwordError').textContent = 'Invalid Password';
                 document.getElementById('passwordError').style.display = 'block';
                 hasError = true;
             }
             
             if (hasError) return;
             
-            // Show loading state
-            document.getElementById('btnText').style.display = 'none';
-            document.getElementById('btnLoader').style.display = 'inline-block';
+            document.getElementById('loginBtn').textContent = 'Loading...';
             document.getElementById('loginBtn').disabled = true;
             
-            // Simulate authentication
             setTimeout(() => {
-                // Store login state
                 if (rememberMe) {
                     localStorage.setItem('studentLoggedIn', 'true');
                     localStorage.setItem('studentUsername', username);
@@ -146,53 +103,32 @@
                     sessionStorage.setItem('studentUsername', username);
                 }
                 
-                // Show success toast
-                showToast('Login successful! Redirecting...', 'success');
+                showToast('Login successful!');
                 
-                // Redirect to dashboard
                 setTimeout(() => {
                     window.location.href = 'student_dashboard.html';
                 }, 1000);
-            }, 1500);
+            }, 1000);
         }
 
         function showForgotPassword() {
-            const message = 'Please contact the hostel administration at:\n\n📧 admin@hostel.edu\n📞 +91-XXX-XXX-XXXX\n\nOr visit the hostel office during working hours.';
-            alert(message);
+            alert('Please contact the academic administration.');
         }
 
-        function showToast(message, type = 'success') {
+        function showToast(message) {
             const toast = document.createElement('div');
             toast.className = 'toast';
-            toast.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 1.5em;">${type === 'success' ? '✅' : '❌'}</span>
-                    <span style="font-weight: 600; color: #1f2937;">${message}</span>
-                </div>
-            `;
+            toast.textContent = message;
             document.body.appendChild(toast);
             
             setTimeout(() => {
-                toast.style.animation = 'slideInRight 0.4s ease-out reverse';
-                setTimeout(() => toast.remove(), 400);
-            }, 3000);
+                toast.remove();
+            }, 2000);
         }
 
-        // Add enter key support
-        document.getElementById('password').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                handleLogin(e);
-            }
-        });
-
-        // Check if already logged in
         document.addEventListener('DOMContentLoaded', function() {
-            if (localStorage.getItem('studentLoggedIn') === 'true' || 
-                sessionStorage.getItem('studentLoggedIn') === 'true') {
-                showToast('Already logged in. Redirecting...', 'success');
-                setTimeout(() => {
-                    window.location.href = 'student_dashboard.html';
-                }, 1500);
+            if (localStorage.getItem('studentLoggedIn') === 'true' || sessionStorage.getItem('studentLoggedIn') === 'true') {
+                window.location.href = 'student_dashboard.html';
             }
         });
     </script>
