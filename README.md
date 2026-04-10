@@ -26,15 +26,7 @@ A comprehensive administrative toolkit for hostel wardens, managers, and adminis
 
 ---
 
-## 💻 Tech Stack
 
-This project strictly follows standard development practices to ensure maximum performance, security, and lightweight deployability. It does not use any heavy external frameworks.
-
-*   **Normal HTML5:** Semantic architecture linking interactive modules.
-*   **Normal CSS3:** Custom, scalable design system styled natively. Includes dynamic responsive flex-grids and vector SVGs.
-*   **Advanced JavaScript (ES6+):** Pure DOM manipulation, LocalStorage/SessionStorage data mocking, state management, and algorithmic front-end filtering logic without needing React/Vue wrappers.
-
----
 
 ## 📁 Core Project Structure
 
