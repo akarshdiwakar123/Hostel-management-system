@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Records - Employee Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-menu li a.active {
+            background-color: #dba90f;
+            color: black;
+        }
+        .nav-menu li a:hover {
+            background-color: #fcebbb;
+            color: black;
+        }
+        .content-header h2 {
+            color: #dba90f;
+        }
+        .btn-verify {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn-verify:hover {
+            background-color: #0b5ed7;
+        }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <svg viewBox="0 0 100 100" width="40" height="40" style="margin-right: 15px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M 25 35 L 75 35 L 50 75 Z" fill="none" stroke="white" stroke-width="3"/>
+            <text x="50" y="55" fill="white" font-size="16" font-family="Arial" text-anchor="middle">CHCS</text>
+        </svg>
+        <h1>College Hostel Counselling System <span>- Employee Portal</span></h1>
+    </div>
+
+    <div class="dashboard-wrapper">
+        <div class="sidebar">
+            <div class="user-profile-sm">
+                <svg viewBox="0 0 100 100" width="80" height="80" style="border-radius: 50%; background: #ddd; margin-bottom: 10px;">
+                    <circle cx="50" cy="50" r="45" fill="#fcfcfc" stroke="#dba90f" stroke-width="4"/>
+                    <circle cx="50" cy="35" r="18" fill="#555" />
+                    <path d="M 20 85 Q 50 55 80 85" fill="none" stroke="#555" stroke-width="12" stroke-linecap="round" />
+                    <rect x="45" y="80" width="10" height="20" fill="#dba90f"/>
+                </svg>
+                <div style="font-weight: bold; color: #333;" id="employeeName">Admin</div>
+                <div style="font-size: 12px; color: #555;">Hostel Manager</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="employee_dashboard.html">Dashboard Overview</a></li>
+                <li><a href="emp_students.html">Manage Students</a></li>
+                <li><a href="emp_complaints.html">Complaints Inbox <span style="background: red; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;">12</span></a></li>
+                <li><a href="emp_leave.html">Leave Approvals</a></li>
+                <li><a href="emp_fees.html" class="active">Fee Records</a></li>
+                <li><a href="#">Analytics & Reports</a></li>
+                <li><a href="#" onclick="handleLogout()" style="color: #dc3545;">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="content-header">
+                <h2>Fee Records Verification</h2>
+            </div>
+            
+            <div style="background: white; padding: 20px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <input type="text" class="search-bar" placeholder="Search by Reg No or Payment Ref..." id="searchFeeInput" onkeyup="filterFeeTable()">
+                
+                <div class="table-responsive">
+                    <table class="custom-table" id="feesTable">
+                        <thead>
+                            <tr>
+                                <th>Reg No</th>
+                                <th>Name</th>
+                                <th>Total Amount</th>
+                                <th>Payment Ref</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023CSE001</td>
+                                <td>Rahul Kumar</td>
+                                <td>₹37,000</td>
+                                <td>RCP20240805</td>
+                                <td class="status-cell"><span style="background: #198754; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Verified</span></td>
+                                <td class="action-cell">-</td>
+                            </tr>
+                            <tr>
+                                <td>2023ECE092</td>
+                                <td>Siddharth Rao</td>
+                                <td>₹37,000</td>
+                                <td>OFFLINE_CHQ_091</td>
+                                <td class="status-cell"><span style="background: #ffc107; color: black; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Pending</span></td>
+                                <td class="action-cell">
+                                    <button class="btn-verify" onclick="verifyFee(this)">Verify Payment</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023MECH045</td>
+                                <td>Vikram Singh</td>
+                                <td>₹15,000</td>
+                                <td>OFFLINE_DD_442</td>
+                                <td class="status-cell"><span style="background: #ffc107; color: black; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Pending</span></td>
+                                <td class="action-cell">
+                                    <button class="btn-verify" onclick="verifyFee(this)">Verify Payment</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyright © 2026 College Hostel Counselling System.
+    </div>
+
+    <script>
+        if (!localStorage.getItem('employeeLoggedIn') && !sessionStorage.getItem('employeeLoggedIn')) {
+            window.location.href = 'employee_login.html';
+        }
+        document.getElementById('employeeName').textContent = localStorage.getItem('employeeName') || sessionStorage.getItem('employeeName') || 'Admin User';
+
+        function verifyFee(btn) {
+            if (confirm('Are you sure you want to verify this offline payment?')) {
+                const tr = btn.closest('tr');
+                const statusCell = tr.querySelector('.status-cell');
+                const actionCell = tr.querySelector('.action-cell');
+                
+                statusCell.innerHTML = '<span style="background: #198754; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Verified</span>';
+                actionCell.innerHTML = '-';
+            }
+        }
+
+        function filterFeeTable() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchFeeInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("feesTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length - 1; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        function handleLogout() {
+            if (confirm('securely end this session?')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

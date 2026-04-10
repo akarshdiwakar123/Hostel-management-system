@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Inbox - Employee Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-menu li a.active {
+            background-color: #dba90f;
+            color: black;
+        }
+        .nav-menu li a:hover {
+            background-color: #fcebbb;
+            color: black;
+        }
+        .content-header h2 {
+            color: #dba90f;
+        }
+        .btn-resolve {
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .btn-resolve:hover {
+            background-color: #157347;
+        }
+        .btn-resolve:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <svg viewBox="0 0 100 100" width="40" height="40" style="margin-right: 15px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M 25 35 L 75 35 L 50 75 Z" fill="none" stroke="white" stroke-width="3"/>
+            <text x="50" y="55" fill="white" font-size="16" font-family="Arial" text-anchor="middle">CHCS</text>
+        </svg>
+        <h1>College Hostel Counselling System <span>- Employee Portal</span></h1>
+    </div>
+
+    <div class="dashboard-wrapper">
+        <div class="sidebar">
+            <div class="user-profile-sm">
+                <svg viewBox="0 0 100 100" width="80" height="80" style="border-radius: 50%; background: #ddd; margin-bottom: 10px;">
+                    <circle cx="50" cy="50" r="45" fill="#fcfcfc" stroke="#dba90f" stroke-width="4"/>
+                    <circle cx="50" cy="35" r="18" fill="#555" />
+                    <path d="M 20 85 Q 50 55 80 85" fill="none" stroke="#555" stroke-width="12" stroke-linecap="round" />
+                    <rect x="45" y="80" width="10" height="20" fill="#dba90f"/>
+                </svg>
+                <div style="font-weight: bold; color: #333;" id="employeeName">Admin</div>
+                <div style="font-size: 12px; color: #555;">Hostel Manager</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="employee_dashboard.html">Dashboard Overview</a></li>
+                <li><a href="emp_students.html">Manage Students</a></li>
+                <li><a href="emp_complaints.html" class="active">Complaints Inbox <span style="background: red; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;">3</span></a></li>
+                <li><a href="emp_leave.html">Leave Approvals <span style="background: red; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;">5</span></a></li>
+                <li><a href="emp_fees.html">Fee Records</a></li>
+                <li><a href="#">Analytics & Reports</a></li>
+                <li><a href="#" onclick="handleLogout()" style="color: #dc3545;">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="content-header">
+                <h2>Complaints Inbox</h2>
+            </div>
+            
+            <div style="background: white; padding: 20px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <div class="table-responsive">
+                    <table class="custom-table" id="complaintsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Room/Location</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10 Apr 2026</td>
+                                <td>A-204</td>
+                                <td>Plumbing</td>
+                                <td>Leaking tap in bathroom</td>
+                                <td><span style="color: #dc3545; font-weight: bold;">High</span></td>
+                                <td class="status-cell"><span class="status-badge status-pending">Pending</span></td>
+                                <td><button class="btn-resolve" onclick="resolveComplaint(this)">Mark Resolved</button></td>
+                            </tr>
+                            <tr>
+                                <td>09 Apr 2026</td>
+                                <td>C-305</td>
+                                <td>Electrical</td>
+                                <td>Fan regulator not working</td>
+                                <td><span style="color: #fd7e14; font-weight: bold;">Medium</span></td>
+                                <td class="status-cell"><span class="status-badge status-pending">Pending</span></td>
+                                <td><button class="btn-resolve" onclick="resolveComplaint(this)">Mark Resolved</button></td>
+                            </tr>
+                            <tr>
+                                <td>08 Apr 2026</td>
+                                <td>B-112</td>
+                                <td>Internet</td>
+                                <td>Wi-Fi disconnects frequently</td>
+                                <td><span style="color: #fd7e14; font-weight: bold;">Medium</span></td>
+                                <td class="status-cell"><span class="status-badge status-pending">Pending</span></td>
+                                <td><button class="btn-resolve" onclick="resolveComplaint(this)">Mark Resolved</button></td>
+                            </tr>
+                            <tr>
+                                <td>01 Apr 2026</td>
+                                <td>A-101</td>
+                                <td>Maintenance</td>
+                                <td>Broken door latch</td>
+                                <td><span style="color: #2b5876; font-weight: bold;">Low</span></td>
+                                <td class="status-cell"><span class="status-badge status-approved">Resolved</span></td>
+                                <td><button class="btn-resolve" disabled>Resolved</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyright © 2026 College Hostel Counselling System.
+    </div>
+
+    <script>
+        if (!localStorage.getItem('employeeLoggedIn') && !sessionStorage.getItem('employeeLoggedIn')) {
+            window.location.href = 'employee_login.html';
+        }
+        document.getElementById('employeeName').textContent = localStorage.getItem('employeeName') || sessionStorage.getItem('employeeName') || 'Admin User';
+
+        function resolveComplaint(btn) {
+            if (confirm('Mark this complaint as resolved?')) {
+                const tr = btn.closest('tr');
+                const statusCell = tr.querySelector('.status-cell');
+                statusCell.innerHTML = '<span class="status-badge status-approved">Resolved</span>';
+                btn.textContent = 'Resolved';
+                btn.disabled = true;
+            }
+        }
+
+        function handleLogout() {
+            if (confirm('securely end this session?')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

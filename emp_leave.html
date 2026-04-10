@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Approvals - Employee Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-menu li a.active {
+            background-color: #dba90f;
+            color: black;
+        }
+        .nav-menu li a:hover {
+            background-color: #fcebbb;
+            color: black;
+        }
+        .content-header h2 {
+            color: #dba90f;
+        }
+        .btn-approve {
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        .btn-deny {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .action-group {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <svg viewBox="0 0 100 100" width="40" height="40" style="margin-right: 15px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M 25 35 L 75 35 L 50 75 Z" fill="none" stroke="white" stroke-width="3"/>
+            <text x="50" y="55" fill="white" font-size="16" font-family="Arial" text-anchor="middle">CHCS</text>
+        </svg>
+        <h1>College Hostel Counselling System <span>- Employee Portal</span></h1>
+    </div>
+
+    <div class="dashboard-wrapper">
+        <div class="sidebar">
+            <div class="user-profile-sm">
+                <svg viewBox="0 0 100 100" width="80" height="80" style="border-radius: 50%; background: #ddd; margin-bottom: 10px;">
+                    <circle cx="50" cy="50" r="45" fill="#fcfcfc" stroke="#dba90f" stroke-width="4"/>
+                    <circle cx="50" cy="35" r="18" fill="#555" />
+                    <path d="M 20 85 Q 50 55 80 85" fill="none" stroke="#555" stroke-width="12" stroke-linecap="round" />
+                    <rect x="45" y="80" width="10" height="20" fill="#dba90f"/>
+                </svg>
+                <div style="font-weight: bold; color: #333;" id="employeeName">Admin</div>
+                <div style="font-size: 12px; color: #555;">Hostel Manager</div>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="employee_dashboard.html">Dashboard Overview</a></li>
+                <li><a href="emp_students.html">Manage Students</a></li>
+                <li><a href="emp_complaints.html">Complaints Inbox <span style="background: red; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;">12</span></a></li>
+                <li><a href="emp_leave.html" class="active">Leave Approvals <span id="leaveBadge" style="background: red; color: white; padding: 2px 6px; border-radius: 10px; font-size: 11px;">2</span></a></li>
+                <li><a href="emp_fees.html">Fee Records</a></li>
+                <li><a href="#">Analytics & Reports</a></li>
+                <li><a href="#" onclick="handleLogout()" style="color: #dc3545;">Logout</a></li>
+            </ul>
+        </div>
+        
+        <div class="dashboard-content">
+            <div class="content-header">
+                <h2>Leave Approvals</h2>
+            </div>
+            
+            <div style="background: white; padding: 20px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <div class="table-responsive">
+                    <table class="custom-table" id="leaveTable">
+                        <thead>
+                            <tr>
+                                <th>Student Reg</th>
+                                <th>Name</th>
+                                <th>Dates</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023CSE015</td>
+                                <td>Amit Patel</td>
+                                <td>15 Apr - 18 Apr</td>
+                                <td>Going Home</td>
+                                <td class="status-cell"><span class="status-badge status-pending">Pending</span></td>
+                                <td class="action-cell">
+                                    <div class="action-group">
+                                        <button class="btn-approve" onclick="actionLeave(this, 'Approved')">Approve</button>
+                                        <button class="btn-deny" onclick="actionLeave(this, 'Denied')">Deny</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023MECH045</td>
+                                <td>Vikram Singh</td>
+                                <td>12 Apr - 14 Apr</td>
+                                <td>Medical Emergency</td>
+                                <td class="status-cell"><span class="status-badge status-pending">Pending</span></td>
+                                <td class="action-cell">
+                                    <div class="action-group">
+                                        <button class="btn-approve" onclick="actionLeave(this, 'Approved')">Approve</button>
+                                        <button class="btn-deny" onclick="actionLeave(this, 'Denied')">Deny</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2023CSE001</td>
+                                <td>Rahul Kumar</td>
+                                <td>10 Dec - 15 Dec</td>
+                                <td>Family Function</td>
+                                <td class="status-cell"><span class="status-badge status-approved">Approved</span></td>
+                                <td class="action-cell">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyright © 2026 College Hostel Counselling System.
+    </div>
+
+    <script>
+        if (!localStorage.getItem('employeeLoggedIn') && !sessionStorage.getItem('employeeLoggedIn')) {
+            window.location.href = 'employee_login.html';
+        }
+        document.getElementById('employeeName').textContent = localStorage.getItem('employeeName') || sessionStorage.getItem('employeeName') || 'Admin User';
+
+        let badgeCount = 2;
+
+        function actionLeave(btn, action) {
+            const tr = btn.closest('tr');
+            const statusCell = tr.querySelector('.status-cell');
+            const actionCell = tr.querySelector('.action-cell');
+            
+            if (action === 'Approved') {
+                statusCell.innerHTML = '<span class="status-badge status-approved">Approved</span>';
+            } else {
+                statusCell.innerHTML = '<span class="status-badge" style="background: #dc3545; color: white;">Denied</span>';
+            }
+            
+            actionCell.innerHTML = `<strong>${action}</strong>`;
+            
+            badgeCount--;
+            if (badgeCount <= 0) {
+                document.getElementById('leaveBadge').style.display = 'none';
+            } else {
+                document.getElementById('leaveBadge').textContent = badgeCount;
+            }
+        }
+
+        function handleLogout() {
+            if (confirm('securely end this session?')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>
