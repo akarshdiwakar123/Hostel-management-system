@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login - College Hostel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #f7f9fa; }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <svg viewBox="0 0 100 100" width="40" height="40" style="margin-right: 15px;">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="white" stroke-width="5"/>
+            <path d="M 25 35 L 75 35 L 50 75 Z" fill="none" stroke="white" stroke-width="3"/>
+            <text x="50" y="55" fill="white" font-size="16" font-family="Arial" text-anchor="middle">CHCS</text>
+        </svg>
+        <h1>College Hostel Counselling System</h1>
+    </div>
+
+    <div class="container-center">
+        <div class="auth-box">
+            <h2 style="color: #dba90f;">Employee Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Employee ID / Email</label>
+                    <input type="text" id="username" name="username" class="form-control" required autocomplete="username">
+                    <div id="usernameError" style="color: #dc3545; font-size: 12px; margin-top: 5px; display: none;"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required autocomplete="current-password">
+                    <div id="passwordError" style="color: #dc3545; font-size: 12px; margin-top: 5px; display: none;"></div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <label style="font-size: 14px; color: #555;">
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                    <a href="#" onclick="showForgotPassword(); return false;" style="color: #dba90f; text-decoration: none; font-size: 14px;">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary" id="loginBtn" style="background-color: #dba90f; color: black; font-weight: bold;">Login</button>
+            </form>
+
+            <a href="index.html" class="btn-back">Back to Home</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        Copyright © 2026 College Hostel Counselling System.
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            document.getElementById('usernameError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            
+            let hasError = false;
+            
+            if (username.length < 3) {
+                document.getElementById('usernameError').textContent = 'Invalid Employee ID';
+                document.getElementById('usernameError').style.display = 'block';
+                hasError = true;
+            }
+            
+            if (password.length < 5) {
+                document.getElementById('passwordError').textContent = 'Invalid Password';
+                document.getElementById('passwordError').style.display = 'block';
+                hasError = true;
+            }
+            
+            if (hasError) return;
+            
+            document.getElementById('loginBtn').textContent = 'Loading...';
+            document.getElementById('loginBtn').disabled = true;
+            
+            setTimeout(() => {
+                if (rememberMe) {
+                    localStorage.setItem('employeeLoggedIn', 'true');
+                    localStorage.setItem('employeeName', username);
+                } else {
+                    sessionStorage.setItem('employeeLoggedIn', 'true');
+                    sessionStorage.setItem('employeeName', username);
+                }
+                
+                showToast('Login successful!');
+                
+                setTimeout(() => {
+                    window.location.href = 'employee_dashboard.html';
+                }, 1000);
+            }, 1000);
+        }
+
+        function showForgotPassword() {
+            alert('Please contact the IT department to reset your employee password.');
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('employeeLoggedIn') === 'true' || sessionStorage.getItem('employeeLoggedIn') === 'true') {
+                window.location.href = 'employee_dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>
